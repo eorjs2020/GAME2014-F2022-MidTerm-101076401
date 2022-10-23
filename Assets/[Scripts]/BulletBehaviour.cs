@@ -108,19 +108,51 @@ public class BulletBehaviour: MonoBehaviour
         {
             case ScreenOrientation.Portrait:
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);                
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                if (bulletType == BulletType.PLAYER)
+                {
+                    SetDirection(BulletDirection.UP);
+                }
+                else
+                {
+                    SetDirection(BulletDirection.DOWN);
+                }
                 break;
             case ScreenOrientation.LandscapeLeft:
                 transform.eulerAngles = new Vector3(0, 0, -90);                
-                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);                
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                if (bulletType == BulletType.PLAYER)
+                {
+                    SetDirection(BulletDirection.RIGHT);
+                }
+                else
+                {
+                    SetDirection(BulletDirection.LEFT);
+                }
                 break;
             case ScreenOrientation.LandscapeRight:
                 transform.eulerAngles = new Vector3(0, 0, -90);                
-                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);                
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                if (bulletType == BulletType.PLAYER)
+                {
+                    SetDirection(BulletDirection.RIGHT);
+                }
+                else
+                {
+                    SetDirection(BulletDirection.LEFT);
+                }
                 break;
             case ScreenOrientation.PortraitUpsideDown:
                 transform.eulerAngles = new Vector3(0, 0, 0);                
-                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);                
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                if (bulletType == BulletType.PLAYER)
+                {
+                    SetDirection(BulletDirection.UP);
+                }
+                else
+                {
+                    SetDirection(BulletDirection.DOWN);
+                }
                 break;
         }
     }

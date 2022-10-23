@@ -37,37 +37,86 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Move()
     {
+        var horizontalLength = horizontalBoundary.max - horizontalBoundary.min;
         switch (Screen.orientation)
         {
-            case ScreenOrientation.Portrait:
-                
+            case ScreenOrientation.Portrait:              
+                transform.position = new Vector3(Mathf.PingPong(Time.time * horizontalSpeed, horizontalLength) - horizontalBoundary.max,
+                transform.position.y - verticalSpeed * Time.deltaTime, transform.position.z);
                 break;
             case ScreenOrientation.LandscapeLeft:
-               
+                transform.position = new Vector3(transform.position.x - verticalSpeed * Time.deltaTime,
+                    Mathf.PingPong(Time.time * horizontalSpeed, horizontalLength) - horizontalBoundary.max, transform.position.z);
                 break;
-            case ScreenOrientation.LandscapeRight:
-                
+            case ScreenOrientation.LandscapeRight:                
+                transform.position = new Vector3(transform.position.x - verticalSpeed * Time.deltaTime,
+                    Mathf.PingPong(Time.time * horizontalSpeed, horizontalLength) - horizontalBoundary.max, transform.position.z);
                 break;
-            case ScreenOrientation.PortraitUpsideDown:
-                
+            case ScreenOrientation.PortraitUpsideDown:                
+                transform.position = new Vector3(Mathf.PingPong(Time.time * horizontalSpeed, horizontalLength) - horizontalBoundary.max,
+                transform.position.y - verticalSpeed * Time.deltaTime, transform.position.z);
                 break;
         }
-        var horizontalLength = horizontalBoundary.max - horizontalBoundary.min;
-        transform.position = new Vector3(Mathf.PingPong(Time.time * horizontalSpeed, horizontalLength) - horizontalBoundary.max,
-            transform.position.y - verticalSpeed * Time.deltaTime, transform.position.z);
+        
     }
 
     public void CheckBounds()
     {
-        if (transform.position.y < screenBounds.min)
+        switch (Screen.orientation)
         {
-            ResetEnemy();
+            case ScreenOrientation.Portrait:
+                if (transform.position.y < screenBounds.min)
+                {
+                    ResetEnemy();
+                }
+                break;
+            case ScreenOrientation.LandscapeLeft:
+                if (transform.position.x < screenBounds.min)
+                {
+                    ResetEnemy();
+                }
+                break;
+            case ScreenOrientation.LandscapeRight:
+                if (transform.position.x < screenBounds.min)
+                {
+                    ResetEnemy();
+                }
+                break;
+            case ScreenOrientation.PortraitUpsideDown:
+                if (transform.position.y < screenBounds.min)
+                {
+                    ResetEnemy();
+                }
+                break;
         }
+        
     }
 
     public void ChangeOrientation()
     {
-
+        switch (Screen.orientation)
+        {
+            case ScreenOrientation.Portrait:
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                Debug.Log(Screen.orientation);
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                break;
+            case ScreenOrientation.LandscapeLeft:
+                transform.eulerAngles = new Vector3(0, 0, -90);
+                Debug.Log(Screen.orientation);
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                break;
+            case ScreenOrientation.LandscapeRight:
+                transform.eulerAngles = new Vector3(0, 0, -90);
+                Debug.Log(Screen.orientation);
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                break;
+            case ScreenOrientation.PortraitUpsideDown:
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                Debug.Log(Screen.orientation);
+                gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
+                break;
+        }
     }
 
     public void ResetEnemy()

@@ -24,19 +24,25 @@ public class GameController : MonoBehaviour
     {
         switch (Screen.orientation)
         {
-            case ScreenOrientation.Portrait:
+            case ScreenOrientation.Portrait:                                         
+                Camera.main.orthographicSize = 2.5f;
                 screenOrientation = Orientation.Portrait;
                 break;
-            case ScreenOrientation.LandscapeLeft:
-                screenOrientation=Orientation.LandscapeLeft;
+            case ScreenOrientation.LandscapeLeft:                
+                 Camera.main.orthographicSize = 2.5f;
+                 screenOrientation = Orientation.LandscapeRight;
+                
+                screenOrientation =Orientation.LandscapeLeft;
                 break;
-            case ScreenOrientation.LandscapeRight:
-                screenOrientation = Orientation.LandscapeRight;
+            case ScreenOrientation.LandscapeRight:               
+                Camera.main.orthographicSize = 2.5f;
+                screenOrientation = Orientation.LandscapeLeft;
                 break;
-            case ScreenOrientation.PortraitUpsideDown:
+            case ScreenOrientation.PortraitUpsideDown:                
+                Camera.main.orthographicSize = 2.5f;
                 screenOrientation = Orientation.PortraitUpsideDown;
                 break;
-        }
+        }       
         bulletManager = gameObject.GetComponent<BulletManager>();
         enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemy");
         BuildEnemyList();
@@ -49,60 +55,18 @@ public class GameController : MonoBehaviour
             case ScreenOrientation.Portrait:
                 if (screenOrientation != Orientation.Portrait)
                 {
-                   
-                    foreach (BackgroundStarsBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BackgroundStarsBehaviour)) as BackgroundStarsBehaviour[])
-                    {
-                        go.ChangeOrientation();
-                    }
-                    foreach (BulletBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BulletBehaviour)) as BulletBehaviour[])
-                    {
-                        if (go.bulletType == BulletType.PLAYER)
-                        {
-                            go.SetDirection(BulletDirection.UP);
-                            go.SetOrient();
-                        }
-                        else
-                        {
-                            go.SetDirection(BulletDirection.DOWN);
-                            go.SetOrient();
-                        }
 
-
-                    }
-                    PlayerBehaviour p = GameObject.FindObjectOfType<PlayerBehaviour>();
-                    p.changeOrientation();
+                    ChangeOrientation();
                     Camera cam = Camera.main;
-                    cam.orthographicSize = 5;
-                    bulletManager.ChangeOrientation();
+                    cam.orthographicSize = 5;                    
                     screenOrientation = Orientation.Portrait;
 
                 }
                 break;
             case ScreenOrientation.LandscapeRight:
                 if (screenOrientation != Orientation.LandscapeRight)
-                {                    
-                    
-                    foreach (BackgroundStarsBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BackgroundStarsBehaviour)) as BackgroundStarsBehaviour[])
-                    {
-                        go.ChangeOrientation();
-                    }
-                    foreach (BulletBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BulletBehaviour)) as BulletBehaviour[])
-                    {
-                        if (go.bulletType == BulletType.PLAYER)
-                        {
-                            go.SetDirection(BulletDirection.RIGHT);
-                            go.SetOrient();
-                        }
-                        else
-                        {
-                            go.SetDirection(BulletDirection.LEFT);
-                            go.SetOrient();
-                        }
-
-
-                    }
-                    PlayerBehaviour p = GameObject.FindObjectOfType<PlayerBehaviour>();
-                    p.changeOrientation();
+                {
+                    ChangeOrientation();
                     Camera cam = Camera.main;
                     cam.orthographicSize = 2.5f;
                     screenOrientation = Orientation.LandscapeRight;
@@ -111,27 +75,7 @@ public class GameController : MonoBehaviour
             case ScreenOrientation.LandscapeLeft:
                 if (screenOrientation != Orientation.LandscapeLeft)
                 {
-                   
-                    foreach (BackgroundStarsBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BackgroundStarsBehaviour)) as BackgroundStarsBehaviour[])
-                    {
-                        go.ChangeOrientation();
-                    }
-                    foreach (BulletBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BulletBehaviour)) as BulletBehaviour[])
-                    {
-                        if (go.bulletType == BulletType.PLAYER)
-                        {
-                            go.SetDirection(BulletDirection.RIGHT);
-                            go.SetOrient();
-                        }
-                        else
-                        {
-                            go.SetDirection(BulletDirection.LEFT);
-                            go.SetOrient();
-                        }
-
-                    }
-                    PlayerBehaviour p = GameObject.FindObjectOfType<PlayerBehaviour>();
-                    p.changeOrientation();
+                    ChangeOrientation();
                     Camera cam = Camera.main;
                     cam.orthographicSize = 2.5f;
                     screenOrientation = Orientation.LandscapeLeft;
@@ -139,14 +83,8 @@ public class GameController : MonoBehaviour
                 break;
             case ScreenOrientation.PortraitUpsideDown:
                 if(screenOrientation != Orientation.PortraitUpsideDown)
-                {                 
-                    foreach (BackgroundStarsBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BackgroundStarsBehaviour)) as BackgroundStarsBehaviour[])
-                    {
-                        go.ChangeOrientation();
-                    }                    
-                    
-                    PlayerBehaviour p = GameObject.FindObjectOfType<PlayerBehaviour>();
-                    p.changeOrientation();
+                {
+                    ChangeOrientation();
                     Camera cam = Camera.main;
                     cam.orthographicSize = 5;
                     screenOrientation = Orientation.PortraitUpsideDown;
@@ -156,7 +94,25 @@ public class GameController : MonoBehaviour
 
         }
     }
-
+    void ChangeOrientation()
+    {
+        foreach (BackgroundStarsBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BackgroundStarsBehaviour)) as BackgroundStarsBehaviour[])
+        {
+            go.ChangeOrientation();
+        }
+        foreach (BulletBehaviour go in Resources.FindObjectsOfTypeAll(typeof(BulletBehaviour)) as BulletBehaviour[])
+        {
+            
+            go.SetOrient();
+        }
+        foreach (EnemyBehaviour go in Resources.FindObjectsOfTypeAll(typeof(EnemyBehaviour)) as EnemyBehaviour[])
+        {
+            go.ChangeOrientation();
+        }
+        bulletManager.ChangeOrientation();
+        PlayerBehaviour p = GameObject.FindObjectOfType<PlayerBehaviour>();
+        p.changeOrientation();
+    }
 
     public void BuildEnemyList()
     {

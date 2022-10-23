@@ -13,18 +13,22 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         scoreLabel = GameObject.Find("ScoreLabel").GetComponent<TMP_Text>();
-        
+        scoreLabel.gameObject.transform.position = new Vector3(0, 0, 0);
         SetScore(0);
     }
     public void Update()
     {
-        scoreLabel.text = Screen.orientation.ToString();
+        scoreLabel.text = Screen.orientation.ToString();        
     }
 
     public int GetScore()
     {
-
         return score;
+    }
+
+    public void ChangeOrientation()
+    {
+
     }
 
     public void SetScore(int newScore)
