@@ -98,22 +98,22 @@ public class EnemyBehaviour : MonoBehaviour
         {
             case ScreenOrientation.Portrait:
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                Debug.Log(Screen.orientation);
+                
                 gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
                 break;
             case ScreenOrientation.LandscapeLeft:
                 transform.eulerAngles = new Vector3(0, 0, -90);
-                Debug.Log(Screen.orientation);
+                
                 gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
                 break;
             case ScreenOrientation.LandscapeRight:
                 transform.eulerAngles = new Vector3(0, 0, -90);
-                Debug.Log(Screen.orientation);
+                
                 gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
                 break;
             case ScreenOrientation.PortraitUpsideDown:
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                Debug.Log(Screen.orientation);
+                
                 gameObject.transform.position = new Vector3(gameObject.transform.position.y, gameObject.transform.position.x, 0);
                 break;
         }

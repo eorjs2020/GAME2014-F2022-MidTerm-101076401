@@ -9,16 +9,21 @@ public class ScoreManager : MonoBehaviour
     private TMP_Text scoreLabel;
     private int score = 0;
 
+    private Vector2 scorePortrait, scoreLandscape;
+
     // Start is called before the first frame update
     void Start()
     {
+        scorePortrait = new Vector2(-365.6f, 1236);
+        scoreLandscape = new Vector2(-1152, 578);
         scoreLabel = GameObject.Find("ScoreLabel").GetComponent<TMP_Text>();
-        scoreLabel.gameObject.transform.position = new Vector3(0, 0, 0);
+        
         SetScore(0);
     }
     public void Update()
     {
-        scoreLabel.text = Screen.orientation.ToString();        
+        scoreLabel.text = Screen.orientation.ToString();
+        
     }
 
     public int GetScore()

@@ -19,27 +19,37 @@ public class GameController : MonoBehaviour
     private GameObject enemyPrefab;
     private BulletManager bulletManager;
     private bool checker = false;
+    private Vector3 scorePortrait, scoreLandscape;
+    private GameObject scoreLable;
     // Start is called before the first frame update
     void Start()
     {
+        scorePortrait = new Vector3(-365.6f, 1236, 0);
+        scoreLandscape = new Vector3(-1152, 578, 0);
+        scoreLable = GameObject.Find("ScoreLabel");
         switch (Screen.orientation)
         {
             case ScreenOrientation.Portrait:                                         
                 Camera.main.orthographicSize = 2.5f;
+                scoreLable.transform.localPosition = scorePortrait;
                 screenOrientation = Orientation.Portrait;
+
                 break;
             case ScreenOrientation.LandscapeLeft:                
-                 Camera.main.orthographicSize = 2.5f;
-                 screenOrientation = Orientation.LandscapeRight;
-                
+                Camera.main.orthographicSize = 2.5f;
+                scoreLable.transform.localPosition = scoreLandscape;
+
+
                 screenOrientation =Orientation.LandscapeLeft;
                 break;
             case ScreenOrientation.LandscapeRight:               
                 Camera.main.orthographicSize = 2.5f;
+                scoreLable.transform.localPosition = scoreLandscape;
                 screenOrientation = Orientation.LandscapeLeft;
                 break;
             case ScreenOrientation.PortraitUpsideDown:                
                 Camera.main.orthographicSize = 2.5f;
+                scoreLable.transform.localPosition = scorePortrait;
                 screenOrientation = Orientation.PortraitUpsideDown;
                 break;
         }       
