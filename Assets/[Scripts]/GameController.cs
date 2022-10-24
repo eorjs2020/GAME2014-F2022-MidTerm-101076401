@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
         switch (Screen.orientation)
         {
             case ScreenOrientation.Portrait:                                         
-                Camera.main.orthographicSize = 2.5f;
+                Camera.main.orthographicSize = 5f;
                 scoreLable.transform.localPosition = scorePortrait;
                 screenOrientation = Orientation.Portrait;
 
@@ -38,8 +38,6 @@ public class GameController : MonoBehaviour
             case ScreenOrientation.LandscapeLeft:                
                 Camera.main.orthographicSize = 2.5f;
                 scoreLable.transform.localPosition = scoreLandscape;
-
-
                 screenOrientation =Orientation.LandscapeLeft;
                 break;
             case ScreenOrientation.LandscapeRight:               
@@ -48,7 +46,7 @@ public class GameController : MonoBehaviour
                 screenOrientation = Orientation.LandscapeLeft;
                 break;
             case ScreenOrientation.PortraitUpsideDown:                
-                Camera.main.orthographicSize = 2.5f;
+                Camera.main.orthographicSize = 5f;
                 scoreLable.transform.localPosition = scorePortrait;
                 screenOrientation = Orientation.PortraitUpsideDown;
                 break;
@@ -67,6 +65,7 @@ public class GameController : MonoBehaviour
                 {
 
                     ChangeOrientation();
+                    scoreLable.transform.localPosition = scorePortrait;
                     Camera cam = Camera.main;
                     cam.orthographicSize = 5;                    
                     screenOrientation = Orientation.Portrait;
@@ -79,6 +78,7 @@ public class GameController : MonoBehaviour
                     ChangeOrientation();
                     Camera cam = Camera.main;
                     cam.orthographicSize = 2.5f;
+                    scoreLable.transform.localPosition = scoreLandscape;
                     screenOrientation = Orientation.LandscapeRight;
                 }
                 break;
@@ -86,6 +86,7 @@ public class GameController : MonoBehaviour
                 if (screenOrientation != Orientation.LandscapeLeft)
                 {
                     ChangeOrientation();
+                    scoreLable.transform.localPosition = scoreLandscape;
                     Camera cam = Camera.main;
                     cam.orthographicSize = 2.5f;
                     screenOrientation = Orientation.LandscapeLeft;
@@ -95,6 +96,7 @@ public class GameController : MonoBehaviour
                 if(screenOrientation != Orientation.PortraitUpsideDown)
                 {
                     ChangeOrientation();
+                    scoreLable.transform.localPosition = scorePortrait;
                     Camera cam = Camera.main;
                     cam.orthographicSize = 5;
                     screenOrientation = Orientation.PortraitUpsideDown;
